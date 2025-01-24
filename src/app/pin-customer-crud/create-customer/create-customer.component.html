@@ -1,0 +1,76 @@
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title text-center">Create Customer</h5>
+
+      <!-- Form -->
+      <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            name="name"
+            ngModel
+            required
+            [maxlength]="50"
+            #name="ngModel"
+            [pattern]="'^[a-zA-Z]+$'"
+          />
+        </div>
+        <!-- Display validation error messages -->
+        <div *ngIf="name.invalid && name.touched" class="text-danger">
+          <div *ngIf="name.errors?.required">Name is required.</div>
+          <div *ngIf="name.errors?.maxlength">
+            Name cannot exceed 50 characters.
+          </div>
+          <div *ngIf="name.errors?.pattern">Only alphabets are allowed.</div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            name="email"
+            ngModel
+            required
+            #email="ngModel"
+            [pattern]="'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'"
+          />
+        </div>
+        <div *ngIf="email.invalid && email.touched" class="text-danger">
+          <div *ngIf="email.errors?.required">Email is required.</div>
+          <div *ngIf="email.errors?.pattern">
+            Please enter a valid email address.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="collaboratory" class="form-label">Region</label>
+          <ngx-select [items]="itemsRegion" name="region" ngModel></ngx-select>
+        </div>
+
+        <div class="mb-3">
+          <label for="privacy" class="form-label">Country</label>
+          <ngx-select
+            [items]="itemsCountry"
+            name="country"
+            ngModel
+          ></ngx-select>
+        </div>
+
+        <div class="text-center">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!userForm.valid"
+          >
+            Create Customer
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

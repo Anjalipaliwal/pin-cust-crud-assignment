@@ -1,0 +1,98 @@
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title text-center">Create Pin</h5>
+
+      <!-- Form to create pin-->
+      <form #pinForm="ngForm" (ngSubmit)="onSubmit(pinForm)">
+        <div class="mb-3">
+          <label for="name" class="form-label">Title</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            name="title"
+            ngModel
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Select Image </label>
+          <div class="col-12">
+            <span class="hidden-file">
+              <input
+                type="file"
+                #fileInput
+                ng2FileSelect
+                [uploader]="uploader"
+                (onFileSelected)="onFileSelected($event)"
+              />
+            </span>
+            <div class="btn-group" (click)="fileInput.click()">
+              <button type="button" class="btn">Select File</button>
+            </div>
+            <div *ngIf="selectedFile">
+              <p>Selected File: {{ selectedFile?.name }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="collaboratory" class="form-label"
+            >Select Collaboratory</label
+          >
+          <ngx-select
+            [items]="itemsCollaboratory"
+            name="collaboratory"
+            ngModel
+            [multiple]="true"
+          ></ngx-select>
+        </div>
+
+        <div class="mb-3">
+          <label for="privacy" class="form-label">Privacy</label>
+          <div class="d-flex flex-row">
+            <!-- Radio button for Public -->
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                id="public"
+                name="privacy"
+                value="Public"
+                [(ngModel)]="privacy"
+                required
+              />
+              <label class="form-check-label" for="public"> Public </label>
+            </div>
+
+            <!-- Radio button for Private -->
+            <div class="form-check ms-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                id="private"
+                name="privacy"
+                value="Private"
+                [(ngModel)]="privacy"
+                required
+              />
+              <label class="form-check-label" for="private"> Private </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!pinForm.valid"
+          >
+            Create Pin
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

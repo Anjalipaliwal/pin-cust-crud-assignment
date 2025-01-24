@@ -7,12 +7,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./list-pin-customer-crud.component.css'],
 })
 export class ListPinCustomerCrudComponent implements OnInit {
-  public listPinData = [];
+  public listPinData:any = [];
   constructor(private router: Router) {}
 
   ngOnInit(): void {
     // fetch pin data from local storage
-    this.listPinData = JSON.parse(localStorage.getItem('pinArr'));
+    this.listPinData = JSON.parse(localStorage.getItem('pinArr')) || [ ];
+    console.log( this.listPinData)
   }
   navigateToAddCustomer() {
     this.router.navigate(['/create-customer']);

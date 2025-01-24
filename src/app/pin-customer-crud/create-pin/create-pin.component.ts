@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
+import {Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 
 @Component({
@@ -17,7 +18,7 @@ export class CreatePinComponent implements OnInit {
     privacy: 'Public',
     title: 'pin1',
   };
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     // this.itemsCollaboratory = localStorage.getItem('customerArr') || []
@@ -62,5 +63,6 @@ export class CreatePinComponent implements OnInit {
     storedArray.push(this.formData);
     localStorage.setItem('pinArr', JSON.stringify(storedArray));
     alert('Pin is created successfully!');
+    this.router.navigate(['/list-pin-cust-crud']);
   }
 }

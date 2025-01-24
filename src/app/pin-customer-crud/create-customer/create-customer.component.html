@@ -16,7 +16,7 @@
             required
             [maxlength]="50"
             #name="ngModel"
-            [pattern]="'^[a-zA-Z]+$'"
+            [pattern]="'^[a-zA-Z]+(\\s[a-zA-Z]+)*$'" 
           />
         </div>
         <!-- Display validation error messages -->

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-customer',
   templateUrl: './create-customer.component.html',
@@ -415,7 +416,7 @@ export class CreateCustomerComponent implements OnInit {
   ];
   errorMessage = '';
   public customerData: any = [];
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private router: Router) {}
 
   ngOnInit(): void {
     // call api to get country and region
@@ -427,6 +428,7 @@ export class CreateCustomerComponent implements OnInit {
     storedArray.push(form.value);
     localStorage.setItem('customerArr', JSON.stringify(storedArray));
     alert('Customer is created successfully!');
+    this.router.navigate(['/list-pin-cust-crud']);
   }
   // Method to fetch countries/region directly from the API
   fetchCountries() {
